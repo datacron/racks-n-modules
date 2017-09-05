@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class TestRack {
@@ -91,7 +92,7 @@ public class TestRack {
 		assertEquals(5, rackA.findSlot(module1.getUSize()));
 	}
 	
-	@Test
+	@Ignore
 	public void testMountImplicit() {
 		rackA.mount(module1, 2);  // Occupies 2-3
 		rackA.mount(module1, 5);  // Occupies 5-6
