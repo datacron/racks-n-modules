@@ -83,7 +83,7 @@ public class Rack {
 		return -1;
 	}
 	
-	public Rackable[] getShelves() {
+	public Rackable[] getUSpace() {
 		return uSpace;
 	}
 	

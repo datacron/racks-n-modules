@@ -25,36 +25,39 @@ public class TestRack {
 		rackA = null;
 	}
 	
-	public void printShelves(Rack rack) {
+	public void printUContent(Rack rack) {
 		int c = 0;
-		for (Rackable module : rack.getShelves()) {
+		for (Rackable module : rack.getUSpace()) {
 			c++;		
 			System.out.println(c + ": " + module);
 		}
 	}
 
 	@Test
-	public void testMount_explicitly() {
-		assertTrue(rackA.mount(module1, 1));
+	public void testMount_shouldOccupyZeroOnePosInArrayAndThreeNull() {
+		rackA.mount(module1, 1);
+		assertTrue(rackA.getUSpace()[0] == module1 
+				&& rackA.getUSpace()[1] == module1
+				&& rackA.getUSpace()[2] == null);
 	}
 	
 	@Test
-	public void testMount_explicitly_slotValidation_negativeScenario() {
+	public void testMount_positionValidation_negativePosScenario() {
 		assertFalse(rackA.mount(module1,-1));
 	}
 	
 	@Test
-	public void testMount_explicitly_slotValidation_tooBigSlot() {
+	public void testMount_positionValidation_11tooBigPos_shouldReturnFalse() {
 		assertFalse(rackA.mount(module2, 11));
 	}
 
 	@Test
-	public void testMount_explicitly_slotValidation_moduleDoesNotFit() {
+	public void testMount_positionValidation_moduleShouldNotFitAtPos8_returnFalse() {
 		assertFalse(rackA.mount(module2, 8));
 	}
 	
 	@Test
-	public void testUnmount_moduleDoesNotExist() {
+	public void testUnmount_moduleDoesNotExist_shouldReturnFalse() {
 		assertFalse(rackA.unmount(module2));
 	}
 	
@@ -65,9 +68,30 @@ public class TestRack {
 	}
 	
 	@Test
+	public void testUnmount_moduleExists_scenarioA_assertArrayPos0To1AreNull() {
+		rackA.mount(module1, 1);
+		rackA.unmount(module1);
+		assertTrue(rackA.getUSpace()[0] == null && rackA.getUSpace()[1] == null);
+	}
+	
+	@Test
 	public void testUnmount_moduleExists_scenarioB() {
 		rackA.mount(module2, 7);
 		assertTrue(rackA.unmount(module2));
+	}
+	
+	@Test
+	public void testUnmount_moduleExists_scenarioB_assertArrayPos6To9Null() {
+		rackA.mount(module2, 7);
+		rackA.unmount(module2);
+		boolean result = true;
+		for (int i = 6; i < 10; i++) {
+			if (rackA.getUSpace()[i] != null) {
+				result = false;
+				break;
+			}
+		}
+		assertTrue(result);
 	}
 	
 	@Test
