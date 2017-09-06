@@ -1,7 +1,5 @@
 # Unit testing with JUnit
 
-## What is this repository for? ##
-
 * Using JUnit for unit testing some robotic system code for mounting electronic equipment modules to racks
 
 ## Dependencies ##
