@@ -78,18 +78,18 @@ public class TestRack {
 	}
 	
 	@Test
-	public void testFindSlot_ScenarioA() {
+	public void testFindSpace_ScenarioA() {
 		rackA.mount(module1, 2);  // Occupies 2-3
 		rackA.mount(module1, 5);  // Occupies 5-6
 		rackA.mount(new Module("EQP-WA", 2), 7); // Occupies 7-8
-		assertEquals(9, rackA.findSlot(2));  // Available slot for this U size should be 9
+		assertEquals(9, rackA.findSpace(2));  // Available slot for this U size should be 9
 	}
 	
 	@Test 
-	public void testFindSlot_ScenarioB() {
+	public void testFindSpace_ScenarioB() {
 		rackA.mount(module2, 1);  					// occupies 1-4
 		rackA.mount(new Module("JUnit 4U", 4), 7);	// occupies 7-10
-		assertEquals(5, rackA.findSlot(module1.getUSize()));
+		assertEquals(5, rackA.findSpace(module1.getUSize()));
 	}
 	
 	@Ignore

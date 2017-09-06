@@ -14,7 +14,7 @@ public class TestRunner {
 			System.out.println(failure.toString());
 		}
 		
-		System.out.println("WAS RESULT SUCCESSFUL ?: " + result.wasSuccessful());
+		System.out.println("RESULT SUCCESSFUL ? - " + result.wasSuccessful());
 	}
 
 }
