@@ -34,7 +34,7 @@ public class TestRack {
 	}
 
 	@Test
-	public void testMount_shouldOccupyZeroOnePosInArrayAndThreeNull() {
+	public void testMount_shouldOccupyZeroOnePosInArrayAndTwoNull() {
 		rackA.mount(module1, 1);
 		assertTrue(rackA.getUSpace()[0] == module1 
 				&& rackA.getUSpace()[1] == module1
