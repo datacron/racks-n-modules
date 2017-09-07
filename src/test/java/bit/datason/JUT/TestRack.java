@@ -105,23 +105,37 @@ public class TestRack {
 	public void testFindSpace_ScenarioA() {
 		rackA.mount(module1, 2);  // Occupies 2-3
 		rackA.mount(module1, 5);  // Occupies 5-6
-		rackA.mount(new Module("EQP-WA", 2), 7); // Occupies 7-8
-		assertEquals(9, rackA.findSpace(2));  // Available slot for this U size should be 9
+		rackA.mount(new Module("EQP-WA", 2), 7); // Occupies pos 7-8 (6-7 in array)
+		assertEquals(9, rackA.findSpace(2));  // Available pos for this U size should be 9
 	}
 	
 	@Test 
 	public void testFindSpace_ScenarioB() {
-		rackA.mount(module2, 1);  					// occupies 1-4
-		rackA.mount(new Module("JUnit 4U", 4), 7);	// occupies 7-10
+		rackA.mount(module2, 1);  					// occupies 1-4 (0-3 in array)
+		rackA.mount(new Module("JUnit 4U", 4), 7);	// occupies 7-10 (6-9 in array)
 		assertEquals(5, rackA.findSpace(module1.getUSize()));
 	}
 	
-	@Ignore
-	public void testMountImplicit() {
+	
+	@Test
+	public void testMount_ScenarioA_should_mount_last_module_on_pos_9_10() {
 		rackA.mount(module1, 2);  // Occupies 2-3
 		rackA.mount(module1, 5);  // Occupies 5-6
-		rackA.mount(new Module("EQP-WA", 2), 7); // Occupies 7-8
-		rackA.mount(new Module("JUnit 2U", 2));
+		rackA.mount(new Module("EQP-WA", 2), 7); // Occupies 7-8 (6-7 in array)
+		rackA.mount(new Module("JUnit 2U", 2));  // should mount on 9-10 (8-9 in array)
+		printUContent(rackA);
+		assertTrue(rackA.getUSpace()[8] != null && rackA.getUSpace()[9] != null);
 	}
+	
+	@Test
+	public void testMount_ScenarioA_should_mount_last_module_on_pos_6_7() {
+		rackA.mount(module1, 1);  // Occupies 1-2 (0-1 in array)
+		rackA.mount(new Module("EQP-WA", 2), 4); // Occupies 4-5 (3-4 in array)
+		rackA.mount(new Module("JUnit 2U", 2));  // should mount on 6-7 (5-6 array-wise)
+		printUContent(rackA);
+		assertTrue(rackA.getUSpace()[5] != null && rackA.getUSpace()[6] != null);
+	}
+
+	 
 
 }
