@@ -18,12 +18,11 @@ public class Rack {
 	}
 
 	public boolean mount(Rackable module) {
-		// Check if module fits in rack in the first place
+		// Check for U space
 		if (module.getUSize() > maxUnits-unitsOccupied) {
-			System.out.println("Doesn't fit");
-			return false;  // doesn't fit anyway
+			return false;  // not enough U space
 		} else {
-			// Mount on the appropriate slot(s)
+			// Proceed
 			int result = findSpace(module.getUSize());
 			if (result != -1) {
 				mount(module, result);
@@ -34,7 +33,12 @@ public class Rack {
 	}
 
 	public boolean mount(Rackable module, int position) {
-		// Validate arguments
+		// TODO validate U space for position
+		for (int i = position-1; i < position + module.getUSize(); i++) {
+			if (uSpace[i] != null)
+				return false;
+		}
+		
 		if ( (position + module.getUSize() <= maxUnits+1) && position>0) {
 			// true; mount module
 			for (int i = position-1; i<position-1 + module.getUSize(); i++) {

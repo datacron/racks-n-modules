@@ -34,11 +34,32 @@ public class TestRack {
 	}
 
 	@Test
-	public void testMount_shouldOccupyZeroOnePosInArrayAndTwoNull() {
+	public void testMount_shouldOccupy0_1PosInArrayAnd2Null() {
 		rackA.mount(module1, 1);
 		assertTrue(rackA.getUSpace()[0] == module1 
 				&& rackA.getUSpace()[1] == module1
 				&& rackA.getUSpace()[2] == null);
+	}
+	
+	@Test
+	public void testMount_shouldReturnFalse_whenUSpaceOccupied_at1_2() {
+		rackA.mount(module1, 1);
+		Rackable mod2 = new Module("Channel Strip", 2);
+		assertFalse(rackA.mount(mod2, 1));
+	}
+	
+	@Test
+	public void testMount_shouldReturnFalse_whenUSpaceOccupied_at5_8() {
+		rackA.mount(module2, 5);
+		Rackable mod2 = new Module("Behringer X32 Rack", 4);
+		assertFalse(rackA.mount(mod2, 5));
+	}
+	
+	@Test
+	public void testMount_shouldReturnFalse_whenUSpaceOccupied_at6_9_and_placed_at_3() {
+		rackA.mount(module2, 6);
+		Rackable mod2 = new Module("Behringer X32 Rack", 4);
+		assertFalse(rackA.mount(mod2, 3));
 	}
 	
 	@Test
