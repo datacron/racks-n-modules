@@ -80,14 +80,12 @@ public class Rack {
 			if (uSpace[i] ==  null) {
 				cSpace++;
 				if (cSpace == uSize) {
-					System.out.println("found " + i);
 					return i;
 				}
 			} else {
 				cSpace = 0;
 			}
 		}
-		System.out.println("shit -1");
 		return -1;
 	}
 	
