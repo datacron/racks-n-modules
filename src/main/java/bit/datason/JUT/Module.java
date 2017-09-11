@@ -17,9 +17,5 @@ public class Module extends Device implements Rackable {
 	public String toString() {
 		return "Module " + this.getName() +  ", " + uSize + "U";
 	}
-	
-	
-	
-
 		
 }

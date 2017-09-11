@@ -33,12 +33,14 @@ public class Rack {
 	}
 
 	public boolean mount(Rackable module, int position) {
-		// TODO validate U space for position
-		for (int i = position-1; i < position + module.getUSize(); i++) {
-			if (uSpace[i] != null)
+		// arguments validation (valid > 0, module size acceptable for pos)
+		if (position <= 0 || position + module.getUSize()-1 > maxUnits)
+			return false;
+		// space validation (target Us null)
+		for (int i = position-1; i < position + module.getUSize()-1; i++) {
+			if (uSpace[i] != null)	// TODO Failure trace (IOR)
 				return false;
-		}
-		
+		} 
 		if ( (position + module.getUSize() <= maxUnits+1) && position>0) {
 			// true; mount module
 			for (int i = position-1; i<position-1 + module.getUSize(); i++) {
@@ -78,12 +80,14 @@ public class Rack {
 			if (uSpace[i] ==  null) {
 				cSpace++;
 				if (cSpace == uSize) {
+					System.out.println("found " + i);
 					return i;
 				}
 			} else {
 				cSpace = 0;
 			}
 		}
+		System.out.println("shit -1");
 		return -1;
 	}
 	

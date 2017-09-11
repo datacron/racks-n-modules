@@ -98,7 +98,17 @@ public class TestRack {
 	@Test
 	public void testUnmount_moduleExists_scenarioB() {
 		rackA.mount(module2, 7);
-		assertTrue(rackA.unmount(module2));
+		//assertTrue(rackA.unmount(module2));
+		rackA.unmount(module2);
+		boolean result = true;
+		for (int i = 6; i < 10; i++) {
+			if (rackA.getUSpace()[i] != null) {
+				result = false;
+				break;
+			}
+		}
+		assertTrue(result);
+		
 	}
 	
 	@Test
@@ -141,9 +151,9 @@ public class TestRack {
 	@Test
 	public void testMount_ScenarioA_should_mount_last_module_on_pos_9_10() {
 		rackA.mount(module1, 2);  // Occupies 2-3
-		rackA.mount(module1, 5);  // Occupies 5-6
+		rackA.mount(new Module("ChannelStrip", 2), 5);  // Occupies 5-6
 		rackA.mount(new Module("EQP-WA", 2), 7); // Occupies 7-8 (6-7 in array)
-		rackA.mount(new Module("JUnit 2U", 2));  // should mount on 9-10 (8-9 in array)
+		rackA.mount(new Module("ValveEQ", 2));  // should mount on 9-10 (8-9 in array)
 		printUContent(rackA);
 		assertTrue(rackA.getUSpace()[8] != null && rackA.getUSpace()[9] != null);
 	}
