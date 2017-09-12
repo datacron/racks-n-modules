@@ -20,10 +20,6 @@ public class TestRack {
 		module2 = new Module("JUnit Module B", 4);
 	}
 	
-	@After
-	public void tearDown() {
-		rackA = null;
-	}
 	
 	public void printUContent(Rack rack) {
 		int c = 0;
@@ -78,28 +74,28 @@ public class TestRack {
 	}
 	
 	@Test
-	public void testUnmount_moduleDoesNotExist_shouldReturnFalse() {
-		assertFalse(rackA.unmount(module2));
+	public void testDismount_moduleDoesNotExist_shouldReturnFalse() {
+		assertFalse(rackA.dismount(module2));
 	}
 	
 	@Test
-	public void testUnmount_moduleExists_scenarioA() {
+	public void testDismount_moduleExists_scenarioA() {
 		rackA.mount(module1, 1);
-		assertTrue(rackA.unmount(module1));
+		assertTrue(rackA.dismount(module1));
 	}
 	
 	@Test
-	public void testUnmount_moduleExists_scenarioA_assertArrayPos0To1AreNull() {
+	public void testDismount_moduleExists_scenarioA_assertArrayPos0To1AreNull() {
 		rackA.mount(module1, 1);
-		rackA.unmount(module1);
+		rackA.dismount(module1);
 		assertTrue(rackA.getUSpace()[0] == null && rackA.getUSpace()[1] == null);
 	}
 	
 	@Test
-	public void testUnmount_moduleExists_scenarioB() {
+	public void testDismount_moduleExists_scenarioB() {
 		rackA.mount(module2, 7);
 		//assertTrue(rackA.unmount(module2));
-		rackA.unmount(module2);
+		rackA.dismount(module2);
 		boolean result = true;
 		for (int i = 6; i < 10; i++) {
 			if (rackA.getUSpace()[i] != null) {
@@ -112,9 +108,9 @@ public class TestRack {
 	}
 	
 	@Test
-	public void testUnmount_moduleExists_scenarioB_assertArrayPos6To9Null() {
+	public void testDismount_moduleExists_scenarioB_assertArrayPos6To9Null() {
 		rackA.mount(module2, 7);
-		rackA.unmount(module2);
+		rackA.dismount(module2);
 		boolean result = true;
 		for (int i = 6; i < 10; i++) {
 			if (rackA.getUSpace()[i] != null) {

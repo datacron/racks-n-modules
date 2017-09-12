@@ -20,7 +20,7 @@ public class Rack {
 	public boolean mount(Rackable module) {
 		// Check for U space
 		if (module.getUSize() > maxUnits-unitsOccupied) {
-			return false;  // not enough U space
+			return false;  // not enough
 		} else {
 			// Proceed
 			int result = findSpace(module.getUSize());
@@ -54,7 +54,7 @@ public class Rack {
 		}
 	}
 
-	public boolean unmount(Rackable module) {
+	public boolean dismount(Rackable module) {
 		for (int i = 0; i < maxUnits; i++) {	// TODO fix useless iteration in the end
 			if (uSpace[i] == module) {
 				for (int j = i; j < i + module.getUSize(); j++) {
@@ -72,7 +72,7 @@ public class Rack {
 		return unitsOccupied;
 	}
 	
-	// Returns -1 if no consecutive slots of module size are found
+	// Returns -1 if no consecutive U space of module size is found
 	// otherwise it returns the first available U position 
 	public int findSpace(int uSize) {
 		int cSpace = 0;
